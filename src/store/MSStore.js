@@ -3,18 +3,18 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const MSStore = (set) => ({
-  // Section1
+  // Section1 Name
   fname: "Gundam",
   lname: "Gundam",
   setName: (newValue) => set({ fname: newValue }),
 
-  // Section2
+  // Section2 Counter
   value: 0,
   incNum: () => set((state) => ({ value: state.value + 1 })),
   decNum: () => set((state) => ({ value: state.value - 1 })),
   resetNum: () => set({ value: 0 }),
 
-  // Section3
+  // Section3 Array of Strings
   arr1: [],
   addTodo: (newTodo) => set((state) => ({ arr1: [...state.arr1, newTodo] })),
   removeTodo: (index) =>
@@ -22,7 +22,7 @@ const MSStore = (set) => ({
       arr1: state.arr1.filter((item, idx) => idx !== index),
     })),
 
-  // Section4
+  // Section4 Array of Objects
   arr2: [
     { model: "RX-78", name: "Gundam" },
     { model: "XXX-01", name: "Wing Gundam" },
@@ -33,7 +33,7 @@ const MSStore = (set) => ({
       arr2: state.arr2.filter((item, idx) => idx !== index),
     })),
 
-  // Section5
+  // Section5 API
   data: [],
   isLoading: false,
   error: false,
@@ -49,6 +49,7 @@ const MSStore = (set) => ({
   },
 });
 
+// Persist only the data that you want to persist
 const MSStorePersist = persist(MSStore, {
   name: "MSStore",
   blacklist: ["isLoading", "error", "errMessage"],
